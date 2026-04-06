@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Tech - Software a medida que digitaliza tu empresa</title>
+  <meta name="description" content="Desarrollamos sistemas internos, automatizamos procesos y creamos herramientas digitales hechas a la medida de tu negocio.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'brand-primary': '#4F46E5',
+            'brand-primary-dark': '#3730A3',
+            'brand-primary-light': '#818CF8',
+            'brand-accent': '#0D9488',
+            'brand-secondary': '#475569',
+            'bg-dark': '#0F172A',
+            'bg-light': '#F8FAFC',
+            'bg-card': '#FFFFFF',
+            'surface-elevated': '#1E293B',
+            'border-light': '#E2E8F0',
+            'text-primary': '#1E293B',
+            'text-secondary': '#64748B',
+            'text-inverse': '#FFFFFF',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-text-primary">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm">
+    <div class="max-w-[1440px] mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2">
+        <div class="w-9 h-9 bg-brand-primary rounded-lg flex items-center justify-center">
+          <svg width="22" height="22" viewBox="0 0 48 47" fill="white">
+            <path d="M0 2l11 0 13 38 13-38 11 0-20 45-8 0z"/>
+          </svg>
+        </div>
+        <span class="text-xl font-bold text-text-primary">Vibe Tech</span>
+      </a>
+
+      <!-- Nav Links (desktop) -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#inicio" class="text-[15px] font-medium text-text-primary hover:text-brand-primary transition-colors">Inicio</a>
+        <a href="#servicios" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Servicios</a>
+        <a href="#nosotros" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Nosotros</a>
+        <a href="#contacto" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Contacto</a>
+      </div>
+
+      <!-- CTA Button -->
+      <a href="#contacto" class="hidden md:flex items-center justify-center bg-brand-primary text-white text-sm font-semibold rounded-full px-6 py-3 hover:bg-brand-primary-dark transition-colors">
+        Cont&aacute;ctanos
+      </a>
+
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Abrir menú">
+        <span class="w-6 h-0.5 bg-text-primary transition-all" id="bar1"></span>
+        <span class="w-6 h-0.5 bg-text-primary transition-all" id="bar2"></span>
+        <span class="w-6 h-0.5 bg-text-primary transition-all" id="bar3"></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-border-light px-6 pb-4">
+      <div class="flex flex-col gap-4 py-4">
+        <a href="#inicio" class="text-[15px] font-medium text-text-primary">Inicio</a>
+        <a href="#servicios" class="text-[15px] font-medium text-text-secondary">Servicios</a>
+        <a href="#nosotros" class="text-[15px] font-medium text-text-secondary">Nosotros</a>
+        <a href="#contacto" class="text-[15px] font-medium text-text-secondary">Contacto</a>
+        <a href="#contacto" class="bg-brand-primary text-white text-sm font-semibold rounded-full px-6 py-3 text-center">Cont&aacute;ctanos</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="bg-white">
+    <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-12 px-6 lg:px-16 py-16 lg:py-20">
+      <!-- Hero Text -->
+      <div class="flex-1 flex flex-col gap-6">
+        <span class="inline-flex w-fit bg-[#EEF2FF] text-brand-primary text-[13px] font-semibold rounded-full px-4 py-2">
+          Software a Medida &middot; Digitalizaci&oacute;n
+        </span>
+        <h1 class="text-4xl lg:text-[48px] font-extrabold text-text-primary leading-[1.1]">
+          Software a medida que digitaliza tu empresa
+        </h1>
+        <p class="text-lg text-text-secondary leading-relaxed">
+          Desarrollamos sistemas internos, automatizamos procesos y creamos herramientas digitales hechas a la medida de tu negocio. Menos planillas, m&aacute;s eficiencia.
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#contacto" class="bg-brand-primary text-white text-base font-semibold rounded-full px-8 py-4 shadow-[0_4px_16px_rgba(79,70,229,0.25)] hover:bg-brand-primary-dark transition-colors">
+            Agenda una reuni&oacute;n
+          </a>
+          <a href="#servicios" class="text-brand-primary text-base font-semibold rounded-full px-8 py-4 border-2 border-brand-primary hover:bg-brand-primary hover:text-white transition-colors">
+            Ver Soluciones
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="flex-1 w-full">
+        <img src="images/hero.png" alt="Software development" class="w-full h-auto rounded-2xl object-cover max-h-[480px]">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="servicios" class="bg-bg-light">
+    <div class="max-w-[1440px] mx-auto flex flex-col items-center gap-12 px-6 lg:px-16 py-16 lg:py-20">
+      <!-- Header -->
+      <div class="flex flex-col items-center gap-3 text-center">
+        <span class="inline-flex bg-[#EEF2FF] text-brand-primary text-[13px] font-semibold rounded-full px-4 py-2">
+          Lo que hacemos
+        </span>
+        <h2 class="text-3xl lg:text-[40px] font-extrabold text-text-primary">Nuestros Servicios</h2>
+        <p class="text-lg text-text-secondary max-w-[560px]">
+          Transformamos procesos manuales y planillas en sistemas digitales eficientes y a medida
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="w-full flex flex-col gap-6">
+        <!-- Row 1 -->
+        <div class="flex flex-col md:flex-row gap-6">
+          <!-- Card: Sistemas Internos -->
+          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
+            <div class="w-12 h-12 bg-[#EEF2FF] rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined text-brand-primary text-2xl">language</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary">Sistemas Internos</h3>
+            <p class="text-[15px] text-text-secondary leading-relaxed">
+              ERPs, CRMs y herramientas de gesti&oacute;n interna dise&ntilde;adas a medida para tu operaci&oacute;n diaria.
+            </p>
+          </div>
+
+          <!-- Card: Automatización de Procesos -->
+          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
+            <div class="w-12 h-12 bg-[#F0FDFA] rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined text-brand-accent text-2xl">smartphone</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary">Automatizaci&oacute;n de Procesos</h3>
+            <p class="text-[15px] text-text-secondary leading-relaxed">
+              Workflows automatizados e integraciones entre tus herramientas para eliminar tareas repetitivas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="flex flex-col md:flex-row gap-6">
+          <!-- Card: Apps Web a Medida -->
+          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
+            <div class="w-12 h-12 bg-[#FFF7ED] rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined text-[#EA580C] text-2xl">settings</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary">Apps Web a Medida</h3>
+            <p class="text-[15px] text-text-secondary leading-relaxed">
+              Dashboards, portales internos y herramientas web que centralizan la informaci&oacute;n de tu negocio.
+            </p>
+          </div>
+
+          <!-- Card: Consultoría en Digitalización -->
+          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
+            <div class="w-12 h-12 bg-[#F5F3FF] rounded-xl flex items-center justify-center">
+              <span class="material-symbols-outlined text-brand-primary-light text-2xl">lightbulb</span>
+            </div>
+            <h3 class="text-xl font-bold text-text-primary">Consultor&iacute;a en Digitalizaci&oacute;n</h3>
+            <p class="text-[15px] text-text-secondary leading-relaxed">
+              Diagn&oacute;stico de procesos, roadmap tecnol&oacute;gico y estrategia digital para modernizar tu empresa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work Section -->
+  <section id="nosotros" class="bg-white">
+    <div class="max-w-[1440px] mx-auto flex flex-col items-center gap-12 px-6 lg:px-16 py-16 lg:py-20">
+      <!-- Header -->
+      <div class="flex flex-col items-center gap-3 text-center">
+        <span class="inline-flex bg-[#F0FDFA] text-brand-accent text-[13px] font-semibold rounded-full px-4 py-2">
+          Nuestro enfoque
+        </span>
+        <h2 class="text-3xl lg:text-[40px] font-extrabold text-text-primary">C&oacute;mo Trabajamos</h2>
+      </div>
+
+      <!-- Cards Row -->
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
+          <span class="text-4xl">&#128269;</span>
+          <h3 class="text-lg font-bold text-text-primary">Transparencia Total</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Sabes exactamente en qu&eacute; estamos y qu&eacute; viene. Sin sorpresas.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
+          <span class="text-4xl">&#128187;</span>
+          <h3 class="text-lg font-bold text-text-primary">C&oacute;digo 100% Tuyo</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Sin vendor lock-in. El c&oacute;digo fuente es tuyo desde el d&iacute;a uno.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
+          <span class="text-4xl">&#128640;</span>
+          <h3 class="text-lg font-bold text-text-primary">Entregas Iterativas</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Ves avances reales cada semana, no solo al final.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
+          <span class="text-4xl">&#129309;</span>
+          <h3 class="text-lg font-bold text-text-primary">Soporte Post-Deploy</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            No desaparecemos. Te acompa&ntilde;amos despu&eacute;s del lanzamiento.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contacto" class="bg-bg-dark">
+    <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-16 px-6 lg:px-16 py-16 lg:py-20">
+      <!-- Contact Info -->
+      <div class="flex-1 flex flex-col gap-8">
+        <h2 class="text-3xl lg:text-[40px] font-extrabold text-white leading-[1.1]">
+          Hablemos de tu proyecto
+        </h2>
+        <p class="text-[17px] text-[#94A3B8] leading-relaxed">
+          &iquest;Tienes una idea o un desaf&iacute;o tecnol&oacute;gico? Conversemos sobre c&oacute;mo podemos ayudarte a hacerlo realidad.
+        </p>
+        <div class="flex flex-col gap-5">
+          <!-- Email -->
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-surface-elevated rounded-[10px] flex items-center justify-center">
+              <span class="material-symbols-outlined text-brand-primary-light text-xl">mail</span>
+            </div>
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[13px] font-medium text-text-secondary">Email</span>
+              <span class="text-[15px] font-medium text-white">contacto@vibetech.cl</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form id="contactForm" class="flex-1 bg-surface-elevated rounded-2xl p-8 flex flex-col gap-5">
+        <!-- Name -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-sm font-medium text-[#94A3B8]">Nombre</label>
+          <input type="text" id="formName" placeholder="Tu nombre completo" required class="w-full bg-bg-dark text-white text-[15px] rounded-[10px] px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors placeholder:text-[#475569]">
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-sm font-medium text-[#94A3B8]">Email</label>
+          <input type="email" id="formEmail" placeholder="tu@email.com" required class="w-full bg-bg-dark text-white text-[15px] rounded-[10px] px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors placeholder:text-[#475569]">
+        </div>
+
+        <!-- Message -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-sm font-medium text-[#94A3B8]">Mensaje</label>
+          <textarea id="formMsg" placeholder="Cuéntanos sobre tu proyecto..." rows="4" required class="w-full bg-bg-dark text-white text-[15px] rounded-[10px] px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors resize-none placeholder:text-[#475569]"></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="w-full bg-brand-primary text-white text-base font-semibold rounded-full px-8 py-4 shadow-[0_4px_16px_rgba(79,70,229,0.25)] hover:bg-brand-primary-dark transition-colors">
+          Enviar Mensaje
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#0A101E]">
+    <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-6 lg:px-16 py-8">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 bg-brand-primary rounded-md flex items-center justify-center">
+          <svg width="16" height="16" viewBox="0 0 48 47" fill="white">
+            <path d="M0 2l11 0 13 38 13-38 11 0-20 45-8 0z"/>
+          </svg>
+        </div>
+        <span class="text-base font-bold text-[#94A3B8]">Vibe Tech</span>
+      </div>
+
+      <!-- Copyright -->
+      <p class="text-sm text-text-secondary">&copy; 2026 Vibe Tech. Todos los derechos reservados.</p>
+
+      <!-- Social Links -->
+      <div class="flex items-center gap-4">
+        <a href="#" class="w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center hover:bg-brand-primary transition-colors group" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a href="#" class="w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center hover:bg-brand-primary transition-colors group" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="#" class="w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center hover:bg-brand-primary transition-colors group" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Contact form → mailto
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('formName').value.trim();
+      const email = document.getElementById('formEmail').value.trim();
+      const msg = document.getElementById('formMsg').value.trim();
+      const subject = encodeURIComponent('Contacto desde vibetech.cl - ' + name);
+      const body = encodeURIComponent('Nombre: ' + name + '\nEmail: ' + email + '\n\nMensaje:\n' + msg);
+      window.location.href = 'mailto:contacto@vibetech.cl?subject=' + subject + '&body=' + body;
+    });
+  </script>
+</body>
+</html>

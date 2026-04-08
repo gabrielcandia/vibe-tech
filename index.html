@@ -348,15 +348,50 @@
       });
     });
 
-    // Contact form → mailto
+    // Contact form → server
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = document.getElementById('formName').value.trim();
-      const email = document.getElementById('formEmail').value.trim();
-      const msg = document.getElementById('formMsg').value.trim();
-      const subject = encodeURIComponent('Contacto desde vibetech.cl - ' + name);
-      const body = encodeURIComponent('Nombre: ' + name + '\nEmail: ' + email + '\n\nMensaje:\n' + msg);
-      window.location.href = 'mailto:contacto@vibetech.cl?subject=' + subject + '&body=' + body;
+      const btn = this.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('nombre', document.getElementById('formName').value.trim());
+      formData.append('email', document.getElementById('formEmail').value.trim());
+      formData.append('mensaje', document.getElementById('formMsg').value.trim());
+
+      fetch('enviar.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            btn.textContent = 'Mensaje enviado!';
+            btn.classList.remove('bg-brand-primary', 'hover:bg-brand-primary-dark');
+            btn.classList.add('bg-brand-accent');
+            document.getElementById('contactForm').reset();
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.classList.remove('bg-brand-accent');
+              btn.classList.add('bg-brand-primary', 'hover:bg-brand-primary-dark');
+              btn.disabled = false;
+            }, 3000);
+          } else {
+            btn.textContent = data.error || 'Error al enviar';
+            btn.classList.add('bg-red-500');
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.classList.remove('bg-red-500');
+              btn.disabled = false;
+            }, 3000);
+          }
+        })
+        .catch(() => {
+          btn.textContent = 'Error de conexion';
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+          }, 3000);
+        });
     });
   </script>
 </body>

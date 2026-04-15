@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /enviar.php
+
+Sitemap: https://vibetech.cl/sitemap.xml

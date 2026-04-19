@@ -33,15 +33,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            inter: ['Inter', 'sans-serif'],
-          },
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
           colors: {
             'brand-primary': '#4F46E5',
             'brand-primary-dark': '#3730A3',
@@ -63,6 +60,78 @@
   </script>
   <style>
     body { font-family: 'Inter', sans-serif; }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.96); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+    .reveal-scale.is-visible { opacity: 1; transform: scale(1); }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+    .delay-5 { transition-delay: 0.40s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 4px 16px rgba(79,70,229,0.25); }
+      50% { box-shadow: 0 8px 32px rgba(79,70,229,0.45); }
+    }
+
+    .hero-intro { animation: fadeUp 0.7s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-intro-d1 { animation: fadeUp 0.7s 0.1s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-intro-d2 { animation: fadeUp 0.7s 0.2s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-intro-d3 { animation: fadeUp 0.7s 0.3s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-intro-d4 { animation: fadeUp 0.7s 0.4s cubic-bezier(.2,.7,.2,1) both; }
+
+    .float { animation: floatY 6s ease-in-out infinite; }
+
+    .hero-gradient { background: linear-gradient(135deg, #FFFFFF 0%, #F5F6FF 60%, #FFFFFF 100%); }
+    .hero-glow { background: radial-gradient(ellipse at top right, rgba(79,70,229,0.18), transparent 60%); }
+
+    /* Cards */
+    .svc-card { transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s cubic-bezier(.2,.7,.2,1), border-color .35s; border: 1px solid transparent; }
+    .svc-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -12px rgba(15,23,42,0.14); border-color: rgba(79,70,229,0.18); }
+    .svc-num { background: linear-gradient(135deg, #4F46E5 0%, #818CF8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    .example-card { transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s cubic-bezier(.2,.7,.2,1); }
+    .example-card:hover { transform: translateY(-6px); box-shadow: 0 28px 56px -16px rgba(15,23,42,0.22); }
+    .example-card:hover .example-img { transform: scale(1.03); }
+    .example-img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+
+    .stat-card { transition: transform .35s cubic-bezier(.2,.7,.2,1), background-color .35s; }
+    .stat-card:hover { transform: translateY(-4px); background-color: #EEF2FF; }
+
+    .cta-glow:hover { animation: pulseGlow 1.8s ease-in-out infinite; }
+
+    .banner-shine { position: relative; overflow: hidden; }
+    .banner-shine::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(100deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+      background-size: 200% 100%;
+      animation: shimmer 6s linear infinite;
+      pointer-events: none;
+    }
+
+    .social-btn { transition: transform .25s, background-color .25s; }
+    .social-btn:hover { transform: translateY(-2px); background-color: #4F46E5; }
+    .social-btn:hover svg { stroke: #fff; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-scale, .hero-intro, .hero-intro-d1, .hero-intro-d2, .hero-intro-d3, .hero-intro-d4 { opacity: 1 !important; transform: none !important; animation: none !important; }
+      .float, .banner-shine::after { animation: none !important; }
+    }
   </style>
 
   <!-- Schema.org JSON-LD -->
@@ -75,10 +144,7 @@
     "logo": "https://vibetech.cl/icon-192.png",
     "email": "contacto@vibetech.cl",
     "description": "Desarrollamos software a medida, sistemas internos y automatizamos procesos para empresas en Chile.",
-    "areaServed": {
-      "@type": "Country",
-      "name": "Chile"
-    },
+    "areaServed": { "@type": "Country", "name": "Chile" },
     "serviceType": ["Desarrollo de Software", "Sistemas Internos", "Automatizaci\u00f3n de Procesos", "Consultor\u00eda en Digitalizaci\u00f3n", "Apps Web a Medida"],
     "sameAs": []
   }
@@ -93,51 +159,54 @@
     "inLanguage": "es"
   }
   </script>
+  <!-- Google tag (gtag.js) - GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W11MK1QFR8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W11MK1QFR8');
+  </script>
 </head>
 <body class="bg-white text-text-primary">
 
   <!-- Navigation -->
-  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm">
-    <div class="max-w-[1440px] mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
-      <!-- Logo -->
-      <a href="#" class="flex items-center gap-2">
-        <div class="w-9 h-9 bg-brand-primary rounded-lg flex items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 48 47" fill="white">
-            <path d="M0 2l11 0 13 38 13-38 11 0-20 45-8 0z"/>
-          </svg>
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-transparent transition-all" id="mainNav">
+    <div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
+      <a href="#" data-ga-event="nav_click" data-ga-target="logo" data-ga-loc="desktop" class="flex items-center gap-2 group">
+        <div class="w-9 h-9 bg-brand-primary rounded-lg flex items-center justify-center transition-transform group-hover:rotate-[-8deg] group-hover:scale-105">
+          <svg width="20" height="20" viewBox="0 0 48 47" fill="white"><path d="M0 2l11 0 13 38 13-38 11 0-20 45-8 0z"/></svg>
         </div>
         <span class="text-xl font-bold text-text-primary">Vibe Tech</span>
       </a>
 
-      <!-- Nav Links (desktop) -->
       <div class="hidden md:flex items-center gap-8">
-        <a href="#inicio" class="text-[15px] font-medium text-text-primary hover:text-brand-primary transition-colors">Inicio</a>
-        <a href="#servicios" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Servicios</a>
-        <a href="#nosotros" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Nosotros</a>
-        <a href="#contacto" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Contacto</a>
+        <a href="#inicio" data-ga-event="nav_click" data-ga-target="inicio" data-ga-loc="desktop" class="text-[15px] font-medium text-text-primary hover:text-brand-primary transition-colors">Inicio</a>
+        <a href="#servicios" data-ga-event="nav_click" data-ga-target="servicios" data-ga-loc="desktop" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Servicios</a>
+        <a href="#nosotros" data-ga-event="nav_click" data-ga-target="nosotros" data-ga-loc="desktop" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Nosotros</a>
+        <a href="/blog/" data-ga-event="nav_click" data-ga-target="blog" data-ga-loc="desktop" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Blog</a>
+        <a href="#contacto" data-ga-event="nav_click" data-ga-target="contacto" data-ga-loc="desktop" class="text-[15px] font-medium text-text-secondary hover:text-brand-primary transition-colors">Contacto</a>
       </div>
 
-      <!-- CTA Button -->
-      <a href="#contacto" class="hidden md:flex items-center justify-center bg-brand-primary text-white text-sm font-semibold rounded-full px-6 py-3 hover:bg-brand-primary-dark transition-colors">
+      <a href="#contacto" data-ga-event="cta_click" data-ga-cta="nav_contact_button" data-ga-loc="desktop" class="hidden md:flex items-center justify-center bg-brand-primary text-white text-sm font-semibold rounded-full px-6 py-2.5 hover:bg-brand-primary-dark hover:shadow-[0_6px_16px_rgba(79,70,229,0.35)] transition-all">
         Cont&aacute;ctanos
       </a>
 
-      <!-- Mobile menu button -->
-      <button id="menuBtn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Abrir menú">
-        <span class="w-6 h-0.5 bg-text-primary transition-all" id="bar1"></span>
-        <span class="w-6 h-0.5 bg-text-primary transition-all" id="bar2"></span>
-        <span class="w-6 h-0.5 bg-text-primary transition-all" id="bar3"></span>
+      <button id="menuBtn" data-ga-event="mobile_menu_toggle" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Abrir men&uacute;">
+        <span class="w-6 h-0.5 bg-text-primary transition-all"></span>
+        <span class="w-6 h-0.5 bg-text-primary transition-all"></span>
+        <span class="w-6 h-0.5 bg-text-primary transition-all"></span>
       </button>
     </div>
 
-    <!-- Mobile menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-border-light px-6 pb-4">
       <div class="flex flex-col gap-4 py-4">
-        <a href="#inicio" class="text-[15px] font-medium text-text-primary">Inicio</a>
-        <a href="#servicios" class="text-[15px] font-medium text-text-secondary">Servicios</a>
-        <a href="#nosotros" class="text-[15px] font-medium text-text-secondary">Nosotros</a>
-        <a href="#contacto" class="text-[15px] font-medium text-text-secondary">Contacto</a>
-        <a href="#contacto" class="bg-brand-primary text-white text-sm font-semibold rounded-full px-6 py-3 text-center">Cont&aacute;ctanos</a>
+        <a href="#inicio" data-ga-event="nav_click" data-ga-target="inicio" data-ga-loc="mobile" class="text-[15px] font-medium text-text-primary">Inicio</a>
+        <a href="#servicios" data-ga-event="nav_click" data-ga-target="servicios" data-ga-loc="mobile" class="text-[15px] font-medium text-text-secondary">Servicios</a>
+        <a href="#nosotros" data-ga-event="nav_click" data-ga-target="nosotros" data-ga-loc="mobile" class="text-[15px] font-medium text-text-secondary">Nosotros</a>
+        <a href="/blog/" data-ga-event="nav_click" data-ga-target="blog" data-ga-loc="mobile" class="text-[15px] font-medium text-text-secondary">Blog</a>
+        <a href="#contacto" data-ga-event="nav_click" data-ga-target="contacto" data-ga-loc="mobile" class="text-[15px] font-medium text-text-secondary">Contacto</a>
+        <a href="#contacto" data-ga-event="cta_click" data-ga-cta="nav_contact_button" data-ga-loc="mobile" class="bg-brand-primary text-white text-sm font-semibold rounded-full px-6 py-3 text-center">Cont&aacute;ctanos</a>
       </div>
     </div>
   </nav>
@@ -145,152 +214,225 @@
   <main>
 
   <!-- Hero Section -->
-  <section id="inicio" class="bg-white">
-    <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-12 px-6 lg:px-16 py-16 lg:py-20">
-      <!-- Hero Text -->
+  <section id="inicio" class="relative hero-gradient overflow-hidden">
+    <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+    <div class="relative max-w-[1280px] mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16 px-6 lg:px-16 py-16 lg:py-24">
       <div class="flex-1 flex flex-col gap-6">
-        <span class="inline-flex w-fit bg-[#EEF2FF] text-brand-primary text-[13px] font-semibold rounded-full px-4 py-2">
-          Software a Medida &middot; Digitalizaci&oacute;n
+        <span class="hero-intro inline-flex w-fit bg-[#EEF2FF] text-brand-primary text-[13px] font-semibold rounded-full px-4 py-2">
+          CTO externo &middot; Entregas en 30 d&iacute;as
         </span>
-        <h1 class="text-4xl lg:text-[48px] font-extrabold text-text-primary leading-[1.1]">
-          Software a medida que digitaliza tu empresa
+        <h1 class="hero-intro-d1 text-4xl lg:text-[52px] font-extrabold text-text-primary leading-[1.08] tracking-tight">
+          Tu software.<br><span class="text-brand-primary">A tu medida.</span>
         </h1>
-        <p class="text-lg text-text-secondary leading-relaxed">
-          Desarrollamos sistemas internos, automatizamos procesos y creamos herramientas digitales hechas a la medida de tu negocio. Menos planillas, m&aacute;s eficiencia.
+        <p class="hero-intro-d2 text-lg text-text-secondary leading-relaxed max-w-[540px]">
+          Migramos tus procesos cr&iacute;ticos de Excel a sistemas web en semanas, no meses. Scope, plazo y precio claros desde el primer d&iacute;a.
         </p>
-        <div class="flex flex-wrap items-center gap-4">
-          <a href="#contacto" class="bg-brand-primary text-white text-base font-semibold rounded-full px-8 py-4 shadow-[0_4px_16px_rgba(79,70,229,0.25)] hover:bg-brand-primary-dark transition-colors">
+        <div class="hero-intro-d3 flex flex-wrap items-center gap-4 pt-2">
+          <a href="#contacto" data-ga-event="cta_click" data-ga-cta="hero_schedule" data-ga-loc="hero" class="cta-glow bg-brand-primary text-white text-base font-semibold rounded-full px-8 py-4 shadow-[0_4px_16px_rgba(79,70,229,0.25)] hover:bg-brand-primary-dark transition-all">
             Agenda una reuni&oacute;n
           </a>
-          <a href="#servicios" class="text-brand-primary text-base font-semibold rounded-full px-8 py-4 border-2 border-brand-primary hover:bg-brand-primary hover:text-white transition-colors">
-            Ver Soluciones
+          <a href="#servicios" data-ga-event="cta_click" data-ga-cta="hero_view_packages" data-ga-loc="hero" class="text-brand-primary text-base font-semibold rounded-full px-8 py-4 border-2 border-brand-primary hover:bg-brand-primary hover:text-white transition-all">
+            Ver Paquetes
           </a>
         </div>
       </div>
 
-      <!-- Hero Image -->
-      <div class="flex-1 w-full">
-        <img src="images/hero.png" alt="Desarrollo de software a medida para empresas en Chile - Vibe Tech" class="w-full h-auto rounded-2xl object-cover max-h-[480px]">
+      <div class="hero-intro-d4 flex-1 w-full">
+        <div class="relative">
+          <div class="absolute -inset-6 bg-brand-primary/10 rounded-[32px] blur-3xl"></div>
+          <div class="float">
+            <img src="images/hero.png" alt="Desarrollo de software a medida para empresas en Chile - Vibe Tech" class="relative w-full h-auto rounded-2xl object-cover max-h-[480px] shadow-[0_24px_64px_rgba(15,23,42,0.18)]">
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Free Quote Banner -->
+  <section class="banner-shine bg-brand-accent">
+    <div class="max-w-[1280px] mx-auto flex flex-wrap items-center justify-center gap-3 px-6 lg:px-16 py-4 text-center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+      <span class="text-white text-[15px] sm:text-base font-semibold">Cotiza gratis &mdash; conversemos sobre tu proyecto sin costo ni compromiso</span>
+      <a href="#contacto" data-ga-event="banner_click" data-ga-banner="free_quote_top" class="inline-flex items-center gap-1.5 bg-white/20 hover:bg-white/30 text-white text-[13px] font-semibold rounded-full px-4 py-1.5 transition-colors">
+        Contactar
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
     </div>
   </section>
 
   <!-- Services Section -->
   <section id="servicios" class="bg-bg-light">
-    <div class="max-w-[1440px] mx-auto flex flex-col items-center gap-12 px-6 lg:px-16 py-16 lg:py-20">
-      <!-- Header -->
+    <div class="max-w-[1280px] mx-auto flex flex-col items-center gap-12 px-6 lg:px-16 py-20 lg:py-24">
       <div class="flex flex-col items-center gap-3 text-center">
-        <span class="inline-flex bg-[#EEF2FF] text-brand-primary text-[13px] font-semibold rounded-full px-4 py-2">
-          Lo que hacemos
+        <span class="reveal inline-flex bg-[#EEF2FF] text-brand-primary text-[13px] font-semibold rounded-full px-4 py-2">
+          Paquetes Vibe Tech
         </span>
-        <h2 class="text-3xl lg:text-[40px] font-extrabold text-text-primary">Nuestros Servicios</h2>
-        <p class="text-lg text-text-secondary max-w-[560px]">
-          Transformamos procesos manuales y planillas en sistemas digitales eficientes y a medida
+        <h2 class="reveal delay-1 text-3xl lg:text-[40px] font-extrabold text-text-primary tracking-tight">Paquetes con scope claro.</h2>
+        <p class="reveal delay-2 text-lg text-text-secondary max-w-[560px]">
+          Entregables definidos. Plazo acordado. Precio desde el primer d&iacute;a.
         </p>
       </div>
 
-      <!-- Services Grid -->
-      <div class="w-full flex flex-col gap-6">
-        <!-- Row 1 -->
-        <div class="flex flex-col md:flex-row gap-6">
-          <!-- Card: Sistemas Internos -->
-          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
-            <div class="w-12 h-12 bg-[#EEF2FF] rounded-xl flex items-center justify-center">
-              <span class="material-symbols-outlined text-brand-primary text-2xl">language</span>
-            </div>
-            <h3 class="text-xl font-bold text-text-primary">Sistemas Internos</h3>
-            <p class="text-[15px] text-text-secondary leading-relaxed">
-              ERPs, CRMs y herramientas de gesti&oacute;n interna dise&ntilde;adas a medida para tu operaci&oacute;n diaria.
-            </p>
-          </div>
-
-          <!-- Card: Automatización de Procesos -->
-          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
-            <div class="w-12 h-12 bg-[#F0FDFA] rounded-xl flex items-center justify-center">
-              <span class="material-symbols-outlined text-brand-accent text-2xl">smartphone</span>
-            </div>
-            <h3 class="text-xl font-bold text-text-primary">Automatizaci&oacute;n de Procesos</h3>
-            <p class="text-[15px] text-text-secondary leading-relaxed">
-              Workflows automatizados e integraciones entre tus herramientas para eliminar tareas repetitivas.
-            </p>
-          </div>
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Card 01 -->
+        <div class="reveal svc-card bg-white rounded-[20px] p-10 flex flex-col gap-3 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+          <span class="svc-num text-[56px] font-light leading-none">01</span>
+          <h3 class="text-2xl font-semibold text-text-primary">Auditor&iacute;a Digital</h3>
+          <p class="text-[15px] text-text-secondary leading-relaxed">
+            Relevamos tus procesos, identificamos cuellos de botella y te entregamos un plan priorizado de automatizaci&oacute;n.
+          </p>
+          <p class="text-[14px] text-text-secondary mt-auto pt-2 border-t border-border-light">
+            <span class="font-semibold text-text-primary">1 semana</span> &middot; Desde $300.000 CLP
+          </p>
         </div>
 
-        <!-- Row 2 -->
-        <div class="flex flex-col md:flex-row gap-6">
-          <!-- Card: Apps Web a Medida -->
-          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
-            <div class="w-12 h-12 bg-[#FFF7ED] rounded-xl flex items-center justify-center">
-              <span class="material-symbols-outlined text-[#EA580C] text-2xl">settings</span>
-            </div>
-            <h3 class="text-xl font-bold text-text-primary">Apps Web a Medida</h3>
-            <p class="text-[15px] text-text-secondary leading-relaxed">
-              Dashboards, portales internos y herramientas web que centralizan la informaci&oacute;n de tu negocio.
-            </p>
-          </div>
+        <!-- Card 02 -->
+        <div class="reveal delay-1 svc-card bg-white rounded-[20px] p-10 flex flex-col gap-3 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+          <span class="svc-num text-[56px] font-light leading-none">02</span>
+          <h3 class="text-2xl font-semibold text-text-primary">Excel &rarr; Sistema Web</h3>
+          <p class="text-[15px] text-text-secondary leading-relaxed">
+            Migramos tu Excel cr&iacute;tico a un sistema web con usuarios, roles, notificaciones y respaldos.
+          </p>
+          <p class="text-[14px] text-text-secondary mt-auto pt-2 border-t border-border-light">
+            <span class="font-semibold text-text-primary">2-4 semanas</span> &middot; Desde $2.000.000 + $60.000/mes
+          </p>
+        </div>
 
-          <!-- Card: Consultoría en Digitalización -->
-          <div class="flex-1 bg-white rounded-2xl p-8 shadow-[0_2px_8px_rgba(0,0,0,0.05)] flex flex-col gap-4">
-            <div class="w-12 h-12 bg-[#F5F3FF] rounded-xl flex items-center justify-center">
-              <span class="material-symbols-outlined text-brand-primary-light text-2xl">lightbulb</span>
-            </div>
-            <h3 class="text-xl font-bold text-text-primary">Consultor&iacute;a en Digitalizaci&oacute;n</h3>
-            <p class="text-[15px] text-text-secondary leading-relaxed">
-              Diagn&oacute;stico de procesos, roadmap tecnol&oacute;gico y estrategia digital para modernizar tu empresa.
-            </p>
-          </div>
+        <!-- Card 03 -->
+        <div class="reveal delay-2 svc-card bg-white rounded-[20px] p-10 flex flex-col gap-3 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+          <span class="svc-num text-[56px] font-light leading-none">03</span>
+          <h3 class="text-2xl font-semibold text-text-primary">Dashboard de Gerencia</h3>
+          <p class="text-[15px] text-text-secondary leading-relaxed">
+            Panel en vivo con las m&eacute;tricas que te importan. Ventas, operaciones, KPIs &mdash; sin que nadie los arme a mano cada semana.
+          </p>
+          <p class="text-[14px] text-text-secondary mt-auto pt-2 border-t border-border-light">
+            <span class="font-semibold text-text-primary">2-3 semanas</span> &middot; Desde $1.500.000 + $50.000/mes
+          </p>
+        </div>
+
+        <!-- Card 04 -->
+        <div class="reveal delay-3 svc-card bg-white rounded-[20px] p-10 flex flex-col gap-3 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+          <span class="svc-num text-[56px] font-light leading-none">04</span>
+          <h3 class="text-2xl font-semibold text-text-primary">App a Medida</h3>
+          <p class="text-[15px] text-text-secondary leading-relaxed">
+            Aplicaci&oacute;n web completa dise&ntilde;ada al proceso &uacute;nico de tu empresa. C&oacute;digo tuyo, sin letra chica.
+          </p>
+          <p class="text-[14px] text-text-secondary mt-auto pt-2 border-t border-border-light">
+            <span class="font-semibold text-text-primary">5-10 semanas</span> &middot; Desde $4.000.000 + $100.000/mes
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How We Work Section -->
-  <section id="nosotros" class="bg-white">
-    <div class="max-w-[1440px] mx-auto flex flex-col items-center gap-12 px-6 lg:px-16 py-16 lg:py-20">
-      <!-- Header -->
+  <!-- Examples Section -->
+  <section class="bg-white">
+    <div class="max-w-[1280px] mx-auto flex flex-col items-center gap-12 px-6 lg:px-16 py-20 lg:py-24">
       <div class="flex flex-col items-center gap-3 text-center">
-        <span class="inline-flex bg-[#F0FDFA] text-brand-accent text-[13px] font-semibold rounded-full px-4 py-2">
-          Nuestro enfoque
+        <span class="reveal inline-flex bg-[#F1F5F9] text-text-secondary text-[13px] font-semibold rounded-full px-4 py-2">
+          Ejemplos
         </span>
-        <h2 class="text-3xl lg:text-[40px] font-extrabold text-text-primary">C&oacute;mo Trabajamos</h2>
+        <h2 class="reveal delay-1 text-3xl lg:text-[48px] font-extrabold text-text-primary tracking-tight leading-[1.1]">As&iacute; se ve nuestro trabajo.</h2>
+        <p class="reveal delay-2 text-lg text-text-secondary">
+          Pantallas reales de lo que entregamos en cada paquete.
+        </p>
       </div>
 
-      <!-- Cards Row -->
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Example 1 -->
+        <article class="reveal example-card bg-white rounded-[20px] overflow-hidden shadow-[0_2px_16px_rgba(15,23,42,0.08)]">
+          <div class="overflow-hidden bg-bg-light">
+            <img src="images/example-auditoria.png" alt="Pantalla de Auditor&iacute;a Digital - diagn&oacute;stico con score" class="example-img w-full h-auto object-cover" loading="lazy">
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-text-primary">Auditor&iacute;a Digital</h3>
+            <p class="text-[13px] text-text-secondary mt-1">Diagn&oacute;stico con score, hallazgos priorizados y quick wins accionables.</p>
+          </div>
+        </article>
+
+        <!-- Example 2 -->
+        <article class="reveal delay-1 example-card bg-white rounded-[20px] overflow-hidden shadow-[0_2px_16px_rgba(15,23,42,0.08)]">
+          <div class="overflow-hidden bg-bg-light">
+            <img src="images/example-excel.png" alt="Pantalla de Excel a Sistema Web - planilla convertida en app" class="example-img w-full h-auto object-cover" loading="lazy">
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-text-primary">Excel &rarr; Sistema Web</h3>
+            <p class="text-[13px] text-text-secondary mt-1">Tu planilla de cotizaciones convertida en app con estados, filtros y seguimiento.</p>
+          </div>
+        </article>
+
+        <!-- Example 3 -->
+        <article class="reveal delay-2 example-card bg-white rounded-[20px] overflow-hidden shadow-[0_2px_16px_rgba(15,23,42,0.08)]">
+          <div class="overflow-hidden bg-bg-light">
+            <img src="images/example-dashboard.png" alt="Pantalla de Dashboard de Gerencia - KPIs y tendencias en vivo" class="example-img w-full h-auto object-cover" loading="lazy">
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-text-primary">Dashboard de Gerencia</h3>
+            <p class="text-[13px] text-text-secondary mt-1">KPIs, metas y tendencias en vivo. Todo lo que tu comit&eacute; necesita, en una vista.</p>
+          </div>
+        </article>
+
+        <!-- Example 4 -->
+        <article class="reveal delay-3 example-card bg-white rounded-[20px] overflow-hidden shadow-[0_2px_16px_rgba(15,23,42,0.08)]">
+          <div class="overflow-hidden bg-bg-light">
+            <img src="images/example-app.png" alt="Pantalla de App a Medida - pipeline visual de ventas" class="example-img w-full h-auto object-cover" loading="lazy">
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-text-primary">App a Medida</h3>
+            <p class="text-[13px] text-text-secondary mt-1">Pipeline visual para gestionar prospectos, cotizaciones y cierres de venta.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples Banner -->
+  <section class="banner-shine bg-brand-primary">
+    <div class="max-w-[1280px] mx-auto flex flex-col items-center gap-4 px-6 lg:px-16 py-12 lg:py-14 text-center">
+      <h2 class="reveal text-2xl sm:text-3xl font-bold text-white">Estos son solo algunos ejemplos.</h2>
+      <p class="reveal delay-1 text-base sm:text-[17px] text-white/80 leading-relaxed max-w-[720px]">
+        Cada empresa tiene desaf&iacute;os &uacute;nicos. Dise&ntilde;amos soluciones a medida seg&uacute;n tus necesidades &mdash; si puedes describirlo, podemos construirlo.
+      </p>
+    </div>
+  </section>
+
+  <!-- How We Work Section -->
+  <section id="nosotros" class="bg-white">
+    <div class="max-w-[1280px] mx-auto flex flex-col items-center gap-12 px-6 lg:px-16 py-20 lg:py-24">
+      <div class="flex flex-col items-center gap-3 text-center">
+        <span class="reveal inline-flex bg-[#F0FDFA] text-brand-accent text-[13px] font-semibold rounded-full px-4 py-2">
+          Nuestro enfoque
+        </span>
+        <h2 class="reveal delay-1 text-3xl lg:text-[40px] font-extrabold text-text-primary tracking-tight">C&oacute;mo trabajamos.</h2>
+      </div>
+
       <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Card 1 -->
-        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
-          <span class="text-4xl">&#128269;</span>
-          <h3 class="text-lg font-bold text-text-primary">Transparencia Total</h3>
-          <p class="text-sm text-text-secondary leading-relaxed">
-            Sabes exactamente en qu&eacute; estamos y qu&eacute; viene. Sin sorpresas.
-          </p>
+        <!-- Stat 1 -->
+        <div class="reveal stat-card bg-bg-light rounded-[20px] p-10 flex flex-col gap-3">
+          <span class="text-xs font-semibold tracking-[0.15em] text-brand-primary">TRANSPARENCIA</span>
+          <h3 class="text-[22px] font-semibold text-text-primary leading-tight">Sabes d&oacute;nde estamos.</h3>
+          <p class="text-sm text-text-secondary leading-[1.5]">Tablero compartido. Sin sorpresas. Sin letra chica.</p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
-          <span class="text-4xl">&#128187;</span>
-          <h3 class="text-lg font-bold text-text-primary">C&oacute;digo 100% Tuyo</h3>
-          <p class="text-sm text-text-secondary leading-relaxed">
-            Sin vendor lock-in. El c&oacute;digo fuente es tuyo desde el d&iacute;a uno.
-          </p>
+        <!-- Stat 2 -->
+        <div class="reveal delay-1 stat-card bg-bg-light rounded-[20px] p-10 flex flex-col gap-3">
+          <span class="text-xs font-semibold tracking-[0.15em] text-brand-primary">PERSONALIZADO</span>
+          <h3 class="text-[22px] font-semibold text-text-primary leading-tight">Tu proceso, no un template.</h3>
+          <p class="text-sm text-text-secondary leading-[1.5]">Construimos sobre tu operaci&oacute;n real. Nada de enlatados que te obligan a adaptarte.</p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
-          <span class="text-4xl">&#128640;</span>
-          <h3 class="text-lg font-bold text-text-primary">Entregas Iterativas</h3>
-          <p class="text-sm text-text-secondary leading-relaxed">
-            Ves avances reales cada semana, no solo al final.
-          </p>
+        <!-- Stat 3 -->
+        <div class="reveal delay-2 stat-card bg-bg-light rounded-[20px] p-10 flex flex-col gap-3">
+          <span class="text-xs font-semibold tracking-[0.15em] text-brand-primary">RITMO</span>
+          <h3 class="text-[22px] font-semibold text-text-primary leading-tight">Avances cada semana.</h3>
+          <p class="text-sm text-text-secondary leading-[1.5]">Releases iterativas. Ves el avance real, no solo al cierre.</p>
         </div>
 
-        <!-- Card 4 -->
-        <div class="bg-bg-light rounded-2xl p-8 flex flex-col items-center gap-3 text-center">
-          <span class="text-4xl">&#129309;</span>
-          <h3 class="text-lg font-bold text-text-primary">Soporte Post-Deploy</h3>
-          <p class="text-sm text-text-secondary leading-relaxed">
-            No desaparecemos. Te acompa&ntilde;amos despu&eacute;s del lanzamiento.
-          </p>
+        <!-- Stat 4 -->
+        <div class="reveal delay-3 stat-card bg-bg-light rounded-[20px] p-10 flex flex-col gap-3">
+          <span class="text-xs font-semibold tracking-[0.15em] text-brand-primary">SOPORTE</span>
+          <h3 class="text-[22px] font-semibold text-text-primary leading-tight">Te acompa&ntilde;amos.</h3>
+          <p class="text-sm text-text-secondary leading-[1.5]">No desaparecemos post-deploy. Seguimos cerca del sistema.</p>
         </div>
       </div>
     </div>
@@ -298,52 +440,47 @@
 
   <!-- Contact Section -->
   <section id="contacto" class="bg-bg-dark">
-    <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-16 px-6 lg:px-16 py-16 lg:py-20">
-      <!-- Contact Info -->
-      <div class="flex-1 flex flex-col gap-8">
-        <h2 class="text-3xl lg:text-[40px] font-extrabold text-white leading-[1.1]">
+    <div class="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-16 px-6 lg:px-16 py-20 lg:py-24">
+      <div class="reveal flex-1 flex flex-col gap-8">
+        <h2 class="text-3xl lg:text-[40px] font-extrabold text-white leading-[1.1] tracking-tight">
           Hablemos de tu proyecto
         </h2>
         <p class="text-[17px] text-[#94A3B8] leading-relaxed">
           &iquest;Tienes una idea o un desaf&iacute;o tecnol&oacute;gico? Conversemos sobre c&oacute;mo podemos ayudarte a hacerlo realidad.
         </p>
+
+        <div class="inline-flex items-center gap-2.5 w-fit bg-[#22C55E15] border border-[#22C55E40] rounded-xl px-5 py-2.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span class="text-[15px] font-semibold text-[#22C55E]">Cotizaci&oacute;n 100% gratis y sin compromiso</span>
+        </div>
+
         <div class="flex flex-col gap-5">
-          <!-- Email -->
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-surface-elevated rounded-[10px] flex items-center justify-center">
-              <span class="material-symbols-outlined text-brand-primary-light text-xl">mail</span>
+            <div class="w-10 h-10 bg-surface-elevated rounded-[10px] flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </div>
             <div class="flex flex-col gap-0.5">
               <span class="text-[13px] font-medium text-text-secondary">Email</span>
-              <span class="text-[15px] font-medium text-white">contacto@vibetech.cl</span>
+              <a href="mailto:contacto@vibetech.cl" data-ga-event="contact_method_click" data-ga-method="email" class="text-[15px] font-medium text-white hover:text-brand-primary-light transition-colors">contacto@vibetech.cl</a>
             </div>
           </div>
-
         </div>
       </div>
 
-      <!-- Contact Form -->
-      <form id="contactForm" class="flex-1 bg-surface-elevated rounded-2xl p-8 flex flex-col gap-5">
-        <!-- Name -->
+      <form id="contactForm" class="reveal delay-1 flex-1 bg-surface-elevated rounded-2xl p-8 flex flex-col gap-5">
         <div class="flex flex-col gap-1.5">
           <label class="text-sm font-medium text-[#94A3B8]">Nombre</label>
-          <input type="text" id="formName" placeholder="Tu nombre completo" required class="w-full bg-bg-dark text-white text-[15px] rounded-[10px] px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors placeholder:text-[#475569]">
+          <input type="text" id="formName" placeholder="Tu nombre completo" required class="w-full bg-bg-dark text-white text-[15px] rounded-xl px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors placeholder:text-[#475569]">
         </div>
-
-        <!-- Email -->
         <div class="flex flex-col gap-1.5">
           <label class="text-sm font-medium text-[#94A3B8]">Email</label>
-          <input type="email" id="formEmail" placeholder="tu@email.com" required class="w-full bg-bg-dark text-white text-[15px] rounded-[10px] px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors placeholder:text-[#475569]">
+          <input type="email" id="formEmail" placeholder="tu@email.com" required class="w-full bg-bg-dark text-white text-[15px] rounded-xl px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors placeholder:text-[#475569]">
         </div>
-
-        <!-- Message -->
         <div class="flex flex-col gap-1.5">
           <label class="text-sm font-medium text-[#94A3B8]">Mensaje</label>
-          <textarea id="formMsg" placeholder="Cuéntanos sobre tu proyecto..." rows="4" required class="w-full bg-bg-dark text-white text-[15px] rounded-[10px] px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors resize-none placeholder:text-[#475569]"></textarea>
+          <textarea id="formMsg" placeholder="Cu&eacute;ntanos sobre tu proyecto..." rows="4" required class="w-full bg-bg-dark text-white text-[15px] rounded-xl px-4 py-3.5 border border-[#334155] focus:border-brand-primary focus:outline-none transition-colors resize-none placeholder:text-[#475569]"></textarea>
         </div>
-
-        <!-- Submit -->
-        <button type="submit" class="w-full bg-brand-primary text-white text-base font-semibold rounded-full px-8 py-4 shadow-[0_4px_16px_rgba(79,70,229,0.25)] hover:bg-brand-primary-dark transition-colors">
+        <button type="submit" class="w-full bg-brand-primary text-white text-base font-semibold rounded-full px-8 py-4 shadow-[0_4px_16px_rgba(79,70,229,0.25)] hover:bg-brand-primary-dark hover:shadow-[0_6px_24px_rgba(79,70,229,0.35)] transition-all">
           Enviar Mensaje
         </button>
       </form>
@@ -354,65 +491,94 @@
 
   <!-- Footer -->
   <footer class="bg-[#0A101E]">
-    <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-6 lg:px-16 py-8">
-      <!-- Logo -->
+    <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-6 lg:px-16 py-8">
       <div class="flex items-center gap-2">
         <div class="w-7 h-7 bg-brand-primary rounded-md flex items-center justify-center">
-          <svg width="16" height="16" viewBox="0 0 48 47" fill="white">
-            <path d="M0 2l11 0 13 38 13-38 11 0-20 45-8 0z"/>
-          </svg>
+          <svg width="14" height="14" viewBox="0 0 48 47" fill="white"><path d="M0 2l11 0 13 38 13-38 11 0-20 45-8 0z"/></svg>
         </div>
         <span class="text-base font-bold text-[#94A3B8]">Vibe Tech</span>
       </div>
 
-      <!-- Copyright -->
-      <p class="text-sm text-text-secondary">&copy; 2026 Vibe Tech. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-6">
+        <a href="/blog/" data-ga-event="footer_click" data-ga-link="blog" class="text-sm text-text-secondary hover:text-brand-primary-light transition-colors">Blog</a>
+        <p class="text-sm text-text-secondary">&copy; 2026 Vibe Tech. Todos los derechos reservados.</p>
+      </div>
 
-      <!-- Social Links -->
       <div class="flex items-center gap-4">
-        <a href="#" class="w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center hover:bg-brand-primary transition-colors group" aria-label="LinkedIn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-          </svg>
+        <a href="#" data-ga-event="social_click" data-ga-platform="linkedin" class="social-btn w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="#" class="w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center hover:bg-brand-primary transition-colors group" aria-label="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
+        <a href="#" data-ga-event="social_click" data-ga-platform="instagram" class="social-btn w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
-        <a href="#" class="w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center hover:bg-brand-primary transition-colors group" aria-label="GitHub">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-          </svg>
+        <a href="#" data-ga-event="social_click" data-ga-platform="github" class="social-btn w-9 h-9 bg-surface-elevated rounded-full flex items-center justify-center" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         </a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Mobile menu
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-      });
+    // GA4 event tracking - delegated handler on data-ga-* attributes
+    function gaTrack(eventName, params) {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, params || {});
+      }
+    }
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('[data-ga-event]');
+      if (!el) return;
+      const event = el.dataset.gaEvent;
+      const params = {};
+      for (const key in el.dataset) {
+        if (key.startsWith('ga') && key !== 'gaEvent') {
+          const name = key.slice(2).replace(/^[A-Z]/, c => c.toLowerCase());
+          params[name] = el.dataset[key];
+        }
+      }
+      if (el.tagName === 'A' && el.href) params.link_url = el.href;
+      gaTrack(event, params);
     });
 
-    // Contact form → server
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); });
+    });
+
+    // Nav shadow on scroll
+    const nav = document.getElementById('mainNav');
+    const setNavState = () => {
+      if (window.scrollY > 12) {
+        nav.classList.add('shadow-[0_4px_24px_rgba(15,23,42,0.06)]', 'border-border-light');
+      } else {
+        nav.classList.remove('shadow-[0_4px_24px_rgba(15,23,42,0.06)]', 'border-border-light');
+      }
+    };
+    setNavState();
+    window.addEventListener('scroll', setNavState, { passive: true });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal, .reveal-scale').forEach(el => io.observe(el));
+
+    // Contact form submit
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const btn = this.querySelector('button[type="submit"]');
       const originalText = btn.textContent;
       btn.textContent = 'Enviando...';
       btn.disabled = true;
+      gaTrack('form_submit_attempt', { form_id: 'contact' });
 
       const formData = new FormData();
       formData.append('nombre', document.getElementById('formName').value.trim());
@@ -423,6 +589,7 @@
         .then(r => r.json())
         .then(data => {
           if (data.success) {
+            gaTrack('generate_lead', { form_id: 'contact', method: 'contact_form' });
             btn.textContent = 'Mensaje enviado!';
             btn.classList.remove('bg-brand-primary', 'hover:bg-brand-primary-dark');
             btn.classList.add('bg-brand-accent');
@@ -434,6 +601,7 @@
               btn.disabled = false;
             }, 3000);
           } else {
+            gaTrack('form_submit_error', { form_id: 'contact', error: data.error || 'unknown' });
             btn.textContent = data.error || 'Error al enviar';
             btn.classList.add('bg-red-500');
             setTimeout(() => {
@@ -444,11 +612,9 @@
           }
         })
         .catch(() => {
+          gaTrack('form_submit_error', { form_id: 'contact', error: 'network' });
           btn.textContent = 'Error de conexion';
-          setTimeout(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-          }, 3000);
+          setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 3000);
         });
     });
   </script>

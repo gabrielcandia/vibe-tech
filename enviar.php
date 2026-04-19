@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Santiago');
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -198,7 +199,62 @@ function sendSmtp($host, $port, $user, $pass, $to, $subject, $body, $replyTo) {
     return true;
 }
 
+function sendTelegram($nombre, $email, $mensaje, $fecha) {
+    $botToken = getenv('TELEGRAM_BOT_TOKEN');
+    $chatId = getenv('TELEGRAM_CHAT_ID');
+
+    if (empty($botToken) || empty($chatId)) {
+        $configFile = __DIR__ . '/.telegram_config';
+        if (file_exists($configFile)) {
+            $lines = array_map('trim', file($configFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+            if (count($lines) >= 2) {
+                if (empty($botToken)) $botToken = $lines[0];
+                if (empty($chatId)) $chatId = $lines[1];
+            }
+        }
+    }
+
+    if (empty($botToken) || empty($chatId)) {
+        return 'missing config';
+    }
+
+    $text = "\xF0\x9F\x9A\x80 *Nuevo mensaje de contacto - Vibe Tech*\n\n"
+          . "*Nombre:* " . $nombre . "\n"
+          . "*Email:* `" . $email . "`\n"
+          . "*Fecha:* " . $fecha . "\n\n"
+          . "*Mensaje:*\n" . $mensaje;
+
+    $payload = http_build_query([
+        'chat_id' => $chatId,
+        'text' => $text,
+        'parse_mode' => 'Markdown',
+        'disable_web_page_preview' => 'true',
+    ]);
+
+    $url = "https://api.telegram.org/bot{$botToken}/sendMessage";
+    $ctx = stream_context_create([
+        'http' => [
+            'method' => 'POST',
+            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+            'content' => $payload,
+            'timeout' => 6,
+            'ignore_errors' => true,
+        ],
+    ]);
+
+    $response = @file_get_contents($url, false, $ctx);
+    if ($response === false) return 'request failed';
+
+    $data = json_decode($response, true);
+    return (isset($data['ok']) && $data['ok'] === true) ? true : ('api error: ' . $response);
+}
+
 $result = sendSmtp($smtpHost, $smtpPort, $smtpUser, $smtpPass, $to, $subject, $body, $email);
+
+$telegramResult = sendTelegram($nombre, $email, $mensaje, $fecha);
+if ($telegramResult !== true) {
+    error_log('[vibetech contacto] Telegram notification failed: ' . $telegramResult);
+}
 
 if ($result === true) {
     echo json_encode(['success' => true, 'message' => 'Mensaje enviado correctamente']);

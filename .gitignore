@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Server-side secrets (never commit these)
+.smtp_config
+.telegram_config
+*.bak
+*.bak-*
